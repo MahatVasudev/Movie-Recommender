@@ -1,0 +1,7 @@
+:root{
+  --color-dark:#00224D;
+  --color-medium-dark: #5D0E41;
+  --color-medium: #5D0E41;
+  --color-light-medium: #A0153E;
+  --color-light: #FF204E;
+}
