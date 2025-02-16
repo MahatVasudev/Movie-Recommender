@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{object.new_title}}
+{% endblock title %}
+
+{% block scripts %}
+<script src="{% static "Movies/rating.js" %}" defer></script> 
+{% endblock scripts%}
+
+{% block content %}
+<header class="title-header">
+<h1>{{object.title}}</h1> 
+original title: {{object.original_title}} <br></center>
+
+<div class="add-watchlist">
+{% if is_watchlist %}
+<button id="popup" onclick="openRater()">
+    <i class="fa fa-plus fa-lg" aria-hidden="true" alt="Add to Watch-List"></i>
+</button>
+{% else %}
+<i class="fa fa-star" aria-hidden="true" style="color:yellow;"></i>
+{{rating}}
+<button id="popup_pop" onclick="RemoveRater()">
+<i class="fa fa-minus" aria-hidden="true"></i>
+</button>
+
+{% endif %}
+</div>
+</header>
+<br>
+
+<div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Give "{{object.title}}" Rating!</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="OpenRaterClose()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+        <form action="" method=POST>
+            {% csrf_token %}
+            <div class="modal-body">
+                <label for="rate">Rate It!</label><br>
+                <input type="range" name="rate" step="0.1" min="0" max="10" value="5" id="rate">
+                <br>
+                <p>Rating: <span id="rating_value" style="color:white;"></span></p>
+            </div>
+            <div class="modal-footer">
+              
+            <button type="submit" class="btn btn-primary"><i class="fa fa-bookmark" aria-hidden="true" style="color:yellow;"></i> Save it</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close" onclick="OpenRaterClose()">Close</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="myModal_remove">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Remove "{{object.title}}"?</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="RemoveRaterClose()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+        <form action="" method=POST >
+            {% csrf_token %}
+            <div class="modal-body">
+                <input type="checkbox" name="remove_rate" id="remove_rate">&nbsp<label for="remove_rate">Are You Sure you want to remove this movie?</label>
+                <br>
+            </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close" onclick="RemoveRaterClose()">Close</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<div class="image-frame">
+
+<main >
+
+<img src="{{object.get_poster}}" class="detail-poster">
+</main>
+
+<div>
+<section>
+    <h3>Rating</h3><i class="fa fa-star" aria-hidden="true" style="color:yellow;"></i>
+    {{object.vote_average}}/10 ({{object.vote_count}})
+    <br>
+{{object.age_rating}} - {{year}} - {{runtime}}<br>
+Genres: | {% for i in genres %}{{i.genre}} |&nbsp;{%endfor%}
+</section>
+    <hr>
+    <article>
+    <h2> Tagline </h2>
+    {{object_desc.tagline}}
+    <br>
+    <br>
+
+    <h2> Overview </h2> 
+    {{object_desc.overview}}
+    </article>
+</div>
+
+</div>
+<details class="movie-details mt-3">
+
+<summary><h2>Details</h2></summary>
+<br>
+<ul>
+<li>original language: <br>&nbsp;&nbsp| {{orig_lang}} |</li>
+
+<li>Dubs available: <br>&nbsp;&nbsp
+    |{% for i in sub_languages%}
+        {{i}} |
+    {% endfor %}
+
+</li>
+
+<li>Production Companies: <br>&nbsp;&nbsp
+|{% for i in production_companies %}    
+    {{i}} |
+{%endfor%}
+</li>
+
+<li>Production Countries: <br>&nbsp;&nbsp
+|{% for i in production_countries%}
+{{i}} |
+{% endfor %}
+</li>
+
+<li>
+Release Date: <br>&nbsp;&nbsp{{date}}
+</li>
+
+<li>
+  imdb_id: <br>&nbsp;&nbsp{{imdb_id}} | <a href="https://www.imdb.com/title/{{imdb_id}}/" target="_blank">({{object.title}})</a> |
+  </li>
+</ul>
+</details>
+
+{% endblock content%}

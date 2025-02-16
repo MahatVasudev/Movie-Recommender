@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Data
+
+{% endblock title %}
+
+
+{% block content %}
+
+
+<h1> Global Data </h1>
+<br>
+
+<hr>
+<div class="container graph-container mr-10 ml-5">
+
+<div class="stats-container">
+    <div class="obj-1"><h2>{{movies_size}}</h2>Movies</div> 
+    <div class="obj-3"><h2>{{watchlist_size}}</h2>Saved Movies</div>
+    <div class="obj-2"><h2>{{user_size}}</h2>Users</div>
+
+</div>
+
+<hr>
+
+{% for i,j in graphs%}
+
+<h2>{{i}}</h2>
+
+{{j|safe}}
+
+<br>
+<br>
+<br>
+<hr>
+{% endfor %}
+</div>
+
+{% endblock content %}

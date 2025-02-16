@@ -1,0 +1,67 @@
+{% extends "temp.html" %}
+{% load static %}
+{% block title %}
+
+Welcome! 
+
+{% endblock title %}
+
+{% block content %}
+
+<center>
+<h1> Welcome {{request.user}}!!</h1>
+</center>
+<br>
+<hr>
+<br>
+<section>
+<h2> Welcome to Movie Recommender </h2>
+<p> Hey!!, Nice to see you.
+    This is a project that recommends users movies based on their tastes.</p>
+
+<h3> Features </h3>
+<ul>
+    <li> <b>Home Page</b> 
+        <ul>
+            <li> In Home Page we recommend using collaborative, content, hybrid based filtering</li>
+            <li><img src="{% static "introduction/home_page.png"%}" style="height:25rem;width:50rem" alt="HomePage"></li>
+            
+        </ul>
+    </li>
+    <br>
+    <li> <b>Search Movies</b>
+        <ul>
+            <li> You can search movies so that you can add them to your watch list or to get their details</li>
+            <li><img src="{% static "introduction/search_page.png" %}" style="height:25rem;width:50rem"></li>
+        </ul>
+    </li>
+    <br>
+    <li> <b> Movies Tab </b>
+        <ul>
+         <li> You can find all movies in this tab </li>
+         <li> <img src="{% static "introduction/movies_page.png" %}" style="height:25rem;width:50rem"></li>
+        </ul>
+    </li>
+    <br>
+    <li> <b> WatchList </b>
+        <ul>
+            <li> Shows all the movies that were added by you </li>
+            <li> <img src="{% static "introduction/watchlist_page.png" %}" style="height:25rem;width:50rem"> </li>
+        </ul>
+    </li>
+    <br>
+    <li> <b> Detailed Movie Page </b>
+        <ul>
+            <li> Shows the details of movies </li>
+            <li> <img src="{% static "introduction/detail_page.png" %}" style="height:25rem;width:50rem"> </li>
+            <li> You can add it to watch list by clicking the "plus" button</li>
+            
+        </ul>
+    </li>
+</ul>
+</section>
+
+<a href="{% url "Movies:movies" %}"><button class="custombutton">Done</button></a>
+
+
+{% endblock content %}

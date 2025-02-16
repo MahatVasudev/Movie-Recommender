@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Home
+
+{% endblock title %}
+
+
+
+{% block content %}
+
+{% for i,j in recommendations%}
+{%if j %}
+<h2> {{i}} </h2>
+<div class="gallery-wrapper">
+<div class="gallery-scroll">
+    <div class="gallery">
+{% for k in j %}
+<a href="{{k.get_absolute_url}}">
+
+    <div class="box item mt-3 my-auto align-items-center d-flex justify-content-center text-center">
+    <img src={{k.get_poster}} >
+    
+    <div class="textin">
+    
+        {{k.title}} <br> </div>
+    
+
+    </div>
+    </a>
+&nbsp;
+&nbsp;
+{% endfor %}
+</div>
+</div>
+</div>
+{% endif %}
+<br>
+
+{% endfor%}
+{% endblock content%}

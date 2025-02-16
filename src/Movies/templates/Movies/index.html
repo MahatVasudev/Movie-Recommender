@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+
+Showing ({{movies_length}}) results for "{{for_text}}"
+
+{% endblock title %}
+
+
+{% block content %}
+
+
+{% if title %}
+{% if movies %}
+<center>
+<h2> Showing ({{movies_length}})  results for "{{title}}" </h2>
+</center>
+<br>
+
+<hr>
+
+<br>
+{% for m in movies %}
+<div class="container">
+    <a href="{{m.get_absolute_url}}">
+        <div class="row">
+            <div class='box mt-3 col-6'>
+            <img src="{{m.get_poster}}" class="poster">
+        </div>
+        <div class="col-6 text-search mt-3">
+            <h3> {{m.title}} <h3>
+                {{m.year}}
+            </div>
+    </div>
+</a>
+<hr>
+</div>
+
+
+
+    
+{% endfor %}
+<center>
+    <div class="block pages d-flex align-items-center mt-5 p-3">
+    
+    <br>
+    {% if current_page != 1 %}
+    <a href="search?title={{title}}&page={{1}}" method=POST>First</a>
+    <a href="search?title={{title}}&page={{previous_page}}" method=POST>Prev</a>
+    
+    {% endif %}
+    
+    {% for i in current_wave %}
+    
+    
+    {% if i == "..." %}
+    
+    ...
+    
+    {% else %}
+    
+    <a href="search?title={{title}}&page={{i}}"method=POST> {{i}} </a> &nbsp
+    
+    {% endif %}
+    
+    {% endfor %}
+    
+    {% if current_page != max_pages %}
+    <a href="search?title={{title}}&page={{next_page}}">Next</a>
+    <a href="search?title={{title}}&page={{max_pages}}">Last</a>
+    
+    {% endif %}
+{% comment %}  
+<div class="block pages">
+<br>
+    {% if current_page != 1 %}
+    <a href="&page={{1}}">First</a>
+    <a href="&page={{previous_page}}">Prev</a>
+    
+    {% endif %}
+    
+    {% for i in current_wave %}
+    
+    
+    {% if i == "..." %}
+    
+    ...
+    
+    {% else %}
+    
+    <a href="&page={{i}}"> {{i}} </a> &nbsp
+    
+    {% endif %}
+    
+    {% endfor %}
+    
+    {% if current_page != max_pages %}
+    <a href="&page={{next_page}}">Next</a>
+    <a href="&page={{max_pages}}">Last</a>
+    
+    {% endif %}
+    
+    </div>  {% endcomment %}
+{% else %}
+    <h2> No Data Found For "{{title}}"</h2>
+{% endif %} 
+{% else %}
+<h2> Oops.. it doesn't seem like you searched Something </h2>
+
+{% endif %} 
+
+</center>
+{% endblock content %}

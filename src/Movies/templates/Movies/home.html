@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+
+
+{% block title%}
+
+Home
+
+{% endblock title%}
+
+
+
+{% block content%}
+
+
+<h1 class="titles">All Movies Available</h1>
+
+
+
+
+{% comment %} <div class='gallery-wrapper'> {% endcomment %}
+{% comment %} <div class='gallery-scroll'> {% endcomment %}
+{% comment %} <div class='gallery'> {% endcomment %}
+<div class="grid">
+
+{% for m in object_list%}
+<a href="{{m.get_absolute_url}}">
+
+<div class="box item mt-3 my-auto align-items-center d-flex justify-content-center text-center">
+<img src={{m.get_poster}} >
+
+<div class="textin">
+
+    {{m.title}} <br> </div>
+
+</div>
+</a>
+
+{% endfor %}
+</div>
+<center>
+<div class="block pages d-flex align-items-center mt-5 p-3">
+
+{% if current_page != 1 %}
+<a href="movies?page={{1}}">First</a>
+<a href="movies?page={{previous_page}}">Prev</a>
+
+{% endif %}
+
+{% for i in current_wave %}
+
+
+{% if i == "..." %}
+
+...
+
+{% else %}
+
+<a href="movies?page={{i}}"> {{i}} </a> &nbsp
+
+{% endif %}
+
+{% endfor %}
+
+{% if current_page != max_pages %}
+<a href="movies?page={{next_page}}">Next</a>
+<a href="movies?page={{max_pages}}">Last</a>
+
+{% endif %}
+
+</div>
+</center>  
+{% comment %} </div> {% endcomment %}
+{% comment %} </div> {% endcomment %}
+{% comment %} </div> {% endcomment %}
+{% endblock content %}
