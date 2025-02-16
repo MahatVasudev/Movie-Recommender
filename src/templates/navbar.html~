@@ -1,0 +1,102 @@
+{% load static %}
+    <nav class="navbar navbar-expand-lg border-bottom border-body nav-banner" data-bs-theme="dark" id="myNavDiv" style="display:none">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" style="color: #E4F1F6" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "Movies:movies" %}">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "Profile:watchlist"%}">Watch List</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url "Movies:graph" %}">Global Stats</a></li>
+              <li><a class="dropdown-item" href="{% url "Profile:pers_stats"%}">Your Stats</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url "Movies:description"%}">About this project</a></li>
+            </ul>
+          </li>
+          
+        </ul>
+        <form class="form-inline my-2 my-lg-0 ml-auto" method=GET action="{% url 'Movies:search-movies' %}">
+          {% csrf_token %}
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><input class="form-control mr-sm-2 search-input" type="search" placeholder="Search Movies" name="title" aria-label="Search"></li> &nbsp;&nbsp;
+          <li class="nav-item"><button class="custombutton" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></li>
+        </ul>
+          {% comment %} <button class="btn btn-outline-danger my-2 my-sm-0"><i class="fa fa-search p pr-5" aria-hidden="true"></i></button> {% endcomment %}
+        </form>
+        <ul class="navbar-nav ml-auto">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown" style='color: white;'>
+              <div class="nav-link dropdown-toggle" id="navbarDropDownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="" class="">&nbsp;{{request.user}}{%if request.user.is_superuser %} (admin) {%endif%}
+              </div>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+                <li><a class="dropdown-item" href="/profile/my_profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              </ul>
+            </div>
+          {% else %}
+          <a class="nav-item initial-btn" aria-current="page" href="/login">&nbsp;&nbsp;Login</a>
+          <a class="nav-item initial-btn" aria-current="page" href="/create_user">&nbsp;&nbsp;Create</a>
+            {% endif %}
+          </ul>
+      </div>
+    </div>
+  </nav>
+  
+
+{% comment %} 
+<nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Offcanvas navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav> {% endcomment %}

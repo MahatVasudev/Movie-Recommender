@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+ML models/knn_sim.joblib
+.ipynb_checkpoints/
+extra data/genre_utility_matrix_with_movies.csv
+# Virtual environment
+venv/
+env/
+*.env
+*.venv
+
+media/avatars/*
+!media/avatars/readme.md
+# Django migrations
+**/migrations/
+!**/migrations/__init__.py
+
+# Database files
+*.sqlite3
+*.db
+
+# Secrets and environment variables
+.env
+*.pem
