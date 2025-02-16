@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{request.user}} Watch List
+{% endblock title %}
+
+{% block content %}
+
+
+{% if watchlist %}
+<center>
+
+    <h1>Your Watch List </h1>
+</center>
+<div class="grid">
+
+{% for i in watchlist %}
+<a href="{{i.m_id.get_absolute_url}}">
+
+    <div class="box item mt-3 my-auto align-items-center d-flex justify-content-center text-center">
+    <img src={{i.m_id.get_poster}} >
+    
+    <div class="textin">
+    
+        {{i.m_id.title}} <br> </div>
+    
+    </div>
+    </a>
+
+{% endfor %}
+</div>
+{% else %}
+<center>
+<h1>You didn't add any movies to Watch-List</h1>
+</center>
+{% endif %}
+{% endblock content%}

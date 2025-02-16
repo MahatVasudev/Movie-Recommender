@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Personal Stats
+
+{% endblock title%}
+{% block content %}
+{% if err%}
+
+<h1> Error!! </h1>
+
+<div class="alert alert-danger" role="alert">
+    {{err}}
+
+</div>
+
+{% else %}
+<h1> Your Personal Stats </h1>
+<br>
+<hr>
+
+<div class="stats-container">
+    <div class="obj-1"><h2>{{data_count}}</h2>Movies in your WatchList</div> 
+    <div class="obj-3"><h2>{{last_added}}</h2>Last Saved Date</div>
+    <div class="obj-2"><h2>{{added_today}}</h2>Added today</div>
+
+</div>
+
+<hr>
+
+{% for i,j in data%}
+<h2> {{i}} </h2>
+
+{{j|safe}}
+
+<br>
+<hr>
+{% endfor %}
+{% endif %}
+{% endblock content %}
